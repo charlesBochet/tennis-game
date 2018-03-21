@@ -70,5 +70,22 @@ class TennisTest extends TestCase
         $this->assertSame('Points: 40 - A / Games: 0 - 0', $this->tennis->getScore());
     }
 
+    public function testPlayersWinGames() {
+        $this->tennis->playerAScores(4);
+        $this->assertSame('Points: 0 - 0 / Games: 1 - 0', $this->tennis->getScore());
+
+        $this->tennis->playerBScores(4);
+        $this->assertSame('Points: 0 - 0 / Games: 1 - 1', $this->tennis->getScore());
+
+        $this->tennis->playerAScores(4);
+        $this->assertSame('Points: 0 - 0 / Games: 2 - 1', $this->tennis->getScore());
+
+        $this->tennis->playerBScores(4);
+        $this->assertSame('Points: 0 - 0 / Games: 2 - 2', $this->tennis->getScore());
+
+        $this->tennis->playerAScores(4);
+        $this->assertSame('Points: 0 - 0 / Games: 3 - 2', $this->tennis->getScore());
+    }
+
 
 }
