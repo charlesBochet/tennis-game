@@ -17,8 +17,10 @@ class Tennis {
     }
 
     private function _playerScores($playerName) {
-        if($this->_playerPoints[$playerName][1] == 6 || $this->_playerPoints[!$playerName][1] == 6) {
-            echo 'end of match';
+        if(($this->_playerPoints[$playerName][1] === 7 && $this->_playerPoints[!$playerName][1] === 5)
+            || ($this->_playerPoints[$playerName][1] === 6 && $this->_playerPoints[!$playerName][1] !== 5)
+         || $this->_playerPoints[!$playerName][1] >= 6) {
+            // end of match
         } else {
             switch($this->_playerPoints[$playerName][0]) {
                 case '0':
