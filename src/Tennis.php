@@ -28,11 +28,13 @@ class Tennis {
                 $this->_playerPoints[$playerName] = '40';
                 break;
             case '40':
-                if($this->_playerPoints[!$playerName] !== '40') {
+                if($this->_playerPoints[!$playerName] === 'A') {
+                    $this->_playerPoints[!$playerName] = '40';
+                } else if ($this->_playerPoints[!$playerName] === '40') {
+                    $this->_playerPoints[$playerName] = 'A';
+                } else {
                     $this->_playerPoints[$playerName] = '0';
                     $this->_playerPoints[!$playerName] = '0';
-                } else {
-                    $this->_playerPoints[$playerName] = 'A';
                 }
                 break;
         }
