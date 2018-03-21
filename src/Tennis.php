@@ -38,6 +38,11 @@ class Tennis {
                     $this->_playerPoints[!$playerName][0] = '0';
                 }
                 break;
+            case 'A':
+                $this->_playerPoints[$playerName][0] = '0';
+                $this->_playerPoints[$playerName][1] = strval(intval($this->_playerPoints[$playerName][1])) + 1;
+                $this->_playerPoints[!$playerName][0] = '0';
+                break;
         }
 
     }
