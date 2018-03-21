@@ -107,7 +107,7 @@ class TennisTest extends TestCase
         $this->assertSame('Points: 0 - 0 / Games: 6 - 0', $this->tennis->getScore());
     }
 
-    public function testPlayerWinAfterEquality() {
+    public function testPlayerAWinAfterEquality() {
         $this->tennis->playerAScores(20);
         $this->tennis->playerBScores(20);
         $this->tennis->playerAScores(8);
@@ -115,10 +115,41 @@ class TennisTest extends TestCase
 
         $this->tennis->playerBScores();
         $this->assertSame('Points: 0 - 0 / Games: 7 - 5', $this->tennis->getScore());
-
     }
 
-    
+    public function testPlayerBWinAfterEquality() {
+        $this->tennis->playerAScores(20);
+        $this->tennis->playerBScores(20);
+        $this->tennis->playerBScores(8);
+        $this->assertSame('Points: 0 - 0 / Games: 5 - 7', $this->tennis->getScore());
 
+        $this->tennis->playerBScores();
+        $this->assertSame('Points: 0 - 0 / Games: 5 - 7', $this->tennis->getScore());
+    }
 
+    public function testPlayersEqualityBeforeTieBreak() {
+        $this->tennis->playerAScores(20);
+        $this->tennis->playerBScores(20);
+        $this->tennis->playerBScores(4);
+        $this->tennis->playerAScores(4);
+        $this->assertSame('Points: 0 - 0 / Games: 6 - 6 / Tie Break: 0 - 0', $this->tennis->getScore());
+    }
+
+    public function testTieBreak() {
+        $this->tennis->playerAScores(20);
+        $this->tennis->playerBScores(20);
+        $this->tennis->playerBScores(4);
+        $this->tennis->playerAScores(4);
+        $this->tennis->playerAScores();
+        $this->assertSame('Points: 0 - 0 / Games: 6 - 6 / Tie Break: 1 - 0', $this->tennis->getScore());
+
+        $this->tennis->playerAScores(3);
+        $this->assertSame('Points: 0 - 0 / Games: 6 - 6 / Tie Break: 4 - 0', $this->tennis->getScore());
+
+        $this->tennis->playerBScores(7);
+        $this->assertSame('Points: 0 - 0 / Games: 6 - 6 / Tie Break: 4 - 7', $this->tennis->getScore());
+
+        $this->tennis->playerAScores();
+        $this->assertSame('Points: 0 - 0 / Games: 6 - 6 / Tie Break: 4 - 7', $this->tennis->getScore());
+    }
 }
