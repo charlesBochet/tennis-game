@@ -38,13 +38,16 @@ class Tennis {
         }
     }
 
-    function playerAScores() {
-        $this->_playerScores(0);
-
+    function playerAScores($number = 1) {
+        for($i = 0; $i < $number; $i++) {
+            $this->_playerScores(0);
+        }
     }
 
-    function playerBScores() {
-        $this->_playerScores(1);
+    function playerBScores($number = 1) {
+        for($i = 0; $i < $number; $i++) {
+            $this->_playerScores(1);
+        }
     }
 
     /**
