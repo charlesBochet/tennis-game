@@ -46,10 +46,13 @@ class Tennis {
         } else if ( $this->_playerPoints[$playerName]['games'][$this->currentSet - 1] == 6 && $this->_playerPoints[!$playerName]['games'][$this->currentSet - 1] == 6 ) {
             if($this->_playerPoints[$playerName]['tie_break'] < 7 && $this->_playerPoints[!$playerName]['tie_break'] < 7) {
                 $this->_playerPoints[$playerName]['tie_break'] += 1;
-                if($this->_playerPoints[$playerName]['tie_break'] === 7 ) {
-                    $this->currentSet += 1;
-                    array_push($this->_playerPoints[$playerName]['games'], '0');
-                    array_push($this->_playerPoints[!$playerName]['games'], '0');
+                if($this->_playerPoints[$playerName]['tie_break'] === 7) {
+                    if($this->nbOfSet > $this->currentSet) {
+                        $this->currentSet += 1;
+                        array_push($this->_playerPoints[$playerName]['games'], '0');
+                        array_push($this->_playerPoints[!$playerName]['games'], '0');
+                    }
+                    $this->_playerPoints[$playerName]['games'][$this->currentSet-1] += 1;
                     $this->_tieBreak = false;
                 }
             } else {
@@ -92,7 +95,7 @@ class Tennis {
             $this->_playerPoints[!$playerName]['tie_break'] = '0';
         }
 
-        if (  ($this->nbOfSet >= $this->currentSet) && abs($this->_playerPoints[$playerName]['games'][$this->currentSet - 1] - $this->_playerPoints[!$playerName]['games'][$this->currentSet - 1]) >= 2
+        if (  ($this->nbOfSet > $this->currentSet) && abs($this->_playerPoints[$playerName]['games'][$this->currentSet - 1] - $this->_playerPoints[!$playerName]['games'][$this->currentSet - 1]) >= 2
              &&  ($this->_playerPoints[$playerName]['games'][$this->currentSet - 1] >= 6 || $this->_playerPoints[!$playerName]['games'][$this->currentSet - 1] >= 6) ){ 
             $this->currentSet += 1;
             array_push($this->_playerPoints[$playerName]['games'], '0');
